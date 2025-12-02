@@ -1,14 +1,14 @@
 <?php
-    class Funcionarios  {
+    class Funcionario  {
         private int $id_funcionario;
 	    private string $nome_funcionario;
 	    private string $sobrenome_funcionario;
 	    private string $CPF_funcionario;
 	    private string $data_nascimento_funcionario;
 	    private string $data_contratacao_funcionario;
-	    private int $telefone_funcionario;
+	    private string $telefone_funcionario;
 	    private string $matricula_funcionario;
-	    private int $codigo_voto_funcionario;
+	    private string $codigo_voto_funcionario;
 	    private bool $ativo_funcionario;
 	    private bool $ADM_funcionario;
 	    private string $email_funcionario;

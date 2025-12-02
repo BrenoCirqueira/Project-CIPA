@@ -1,12 +1,70 @@
 <?php 
-require_once __DIR__ . "../"
-    class FuncionarioController {
-        public function __construct () {}
+    require_once __DIR__ . "/../repositories/FuncionarioDAO.php";
+    require_once __DIR__ . "/../models/Funcionario.php";
 
-        public function registrarFuncionario() {
-            if($_SERVER === "POST") {
-                $
+    class FuncionarioController {
+        private FuncionarioDAO $dao;
+        public function __construct(){
+            $this->dao = new FuncionarioDAO();
+        }
+
+        public function create(string $method): string {
+
+            if($method === "GET"){
+
+                require __DIR__ . "/../views/cadastroFuncionarios.php";
+                return "";
+
+            }
+
+            if($method === "POST") {
+
+                require __DIR__ . "/../views/cadastroFuncionarios.php";
+
+                $funcionario = new Funcionario(
+
+                    0,
+                    htmlspecialchars($_POST["nome_funcionario"]),
+                    htmlspecialchars($_POST["sobrenome_funcionario"]),
+                    htmlspecialchars($_POST["CPF_funcionario"]),    
+                    htmlspecialchars($_POST["data_nascimento_funcionario"]),
+                    htmlspecialchars($_POST["data_contratacao_funcionario"]),
+                    htmlspecialchars($_POST["telefone_funcionario"]),
+                    htmlspecialchars($_POST["matricula_funcionario"]),
+                    htmlspecialchars($_POST["codigo_voto_funcionario"]),
+                    true,
+                    htmlspecialchars($_POST["ADM_funcionario"]) === 'true' ? true : false,
+                    htmlspecialchars($_POST["email_funcionario"]),
+                    htmlspecialchars($_POST["senha_funcionario"])
+                    /*password_hash(htmlspecialchars($_POST["senha_funcionario"]), PASSWORD_BCRYPT)*/
+                
+
+                );
+
+                $response = $this->dao->registrarFuncionario($funcionario);
+                if ($response) {                    
+                    return "Usuário Cadastrado com Sucesso";
+                }
+                return "Problema na criação do usuário";
+
             }
         }
+
+        public function list(string $method): string {
+            if ($method === "GET") {
+        
+                // 1. Busca os dados
+                $funcionarios = $this->dao->getAllFuncionarios();
+        
+                // 2. Carrega a View (A variável $funcionarios fica disponível em listarFuncionarios.php)
+                require __DIR__ . "/../views/listarFuncionarios.php";
+        
+                return ""; // Retorna vazio pois a View já foi renderizada
+            }
+            return "Método não suportado.";
+        }
+
+
+
     }
 ?>
