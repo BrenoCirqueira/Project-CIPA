@@ -22,11 +22,7 @@ function carregarView($view) {
 
         case 'FuncionarioCriado':
             require "views/funcionarioCriado.php";
-            break;
-        
-        case 'CadastroCandidato':
-            require "views/cadastroCandidato.php";
-            break;
+            break;    
 
 
           default:
